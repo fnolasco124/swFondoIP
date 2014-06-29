@@ -1,0 +1,228 @@
+{% extends 'base3.html' %}
+{% block js%}
+	<!--<script src="/media/js/fip.js"></script>-->
+	<script src="/media/js/otro.js"></script>
+	<script src="/media/js/fipValidacion.js"></script>
+{% endblock %}
+{% block contenido %}
+
+{% include 'tramite/nuevo_usuario.html'%}
+
+<div class="col-lg-2">
+	<div class="container">
+		    <div class="row">
+		        <div class="col-sm-3">
+		            <div class="panel-group" id="accordion">
+		                <div class="panel panel-default">
+		                    <div class="panel-heading">
+		                        <h4 class="panel-title">
+		                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-cog"></span> Administración</a>
+		                        </h4>
+		                    </div>
+		                    <div id="collapseOne" class="panel-collapse collapse in">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tbody>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_TablasMaestro"%}"><span class="glyphicon glyphicon-list-alt text-info"></span> Tablas Maestro</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Usuario"%}"><span class="glyphicon glyphicon-user text-info"></span> Usuarios</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Personal"%}"><span class="glyphicon glyphicon-th text-info"></span> Personal</a> 
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_UEjecutora"%}"><span class="glyphicon glyphicon-record text-info"></span> Unidades Ejecutoras</a> 
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Derivacion"%}"><span class="glyphicon glyphicon-transfer text-info"></span> Derivaciones</a> 
+		                                    </td>
+		                                </tr>
+		                            </tbody></table>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-default">
+		                    <div class="panel-heading">
+		                        <h4 class="panel-title">
+		                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-send"></span> Tramite Documentario</a>
+		                        </h4>
+		                    </div>
+		                    <div id="collapseThree" class="panel-collapse collapse">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tbody><tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Protocolo"%}"><span class="glyphicon glyphicon-plus text-info"></span> Nuevo Protocolo</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Convenios" 1%}"><span class="glyphicon glyphicon-file text-info"></span> Convenios</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Bandeja" 1%}"><span class="glyphicon glyphicon-tasks text-info"></span> Bandeja de Entrada</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_LocalizarProtocolo"%}"><span class="glyphicon glyphicon-search text-info"></span> Localizar</a>
+		                                    </td>
+		                                </tr>
+		                            </tbody></table>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-default">
+		                    <div class="panel-heading">
+		                        <h4 class="panel-title">
+		                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+		                            <span class="glyphicon glyphicon-edit"></span> Supervisión</a>
+		                        </h4>
+		                    </div>
+		                    <div id="collapseFour" class="panel-collapse collapse">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tbody>
+		                                    <tr>
+		                                        <td>
+		                                            <a href="{% url "vista_Convenio_Supervisor"%}"><span class="glyphicon glyphicon-book text-info"></span> Convenios</a>
+		                                        </td>
+		                                    </tr>
+		                                    <tr>
+		                                        <td>
+		                                            <a href="#"><span class="glyphicon glyphicon-asterisk text-info"></span> Actividad 2</a>
+		                                        </td>
+		                                    </tr>
+		                                    <tr>
+		                                        <td>
+		                                            <a href="#"><span class="glyphicon glyphicon-asterisk text-info"></span> Actividad 3</a>
+		                                        </td>
+		                                    </tr>
+		                                    <tr>
+		                                        <td>
+		                                            <a href="#"><span class="glyphicon glyphicon-asterisk text-info"></span> Actividad 4</a>
+		                                        </td>
+		                                    </tr>
+		                                </tbody>
+		                            </table>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-default">
+		                    <div class="panel-heading">
+		                        <h4 class="panel-title">
+		                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th"></span> Unidad Ejecutora</a>
+		                        </h4>
+		                    </div>
+		                    <div id="collapseTwo" class="panel-collapse collapse">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tbody><tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Cargar_Presupuesto"%}"><span class="glyphicon glyphicon-upload text-info"></span> Cargar Presupuesto</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Presupuesto"%} "><span class="glyphicon glyphicon-refresh text-info"></span> Presupuesto</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="#"><span class="glyphicon glyphicon-usd text-info"></span> Rendición de cuentas</a>
+		                                    </td>
+		                                </tr>
+		                                
+		                            </tbody></table>
+		                        </div>
+		                    </div>
+		                </div>
+		                
+		            </div>
+		        </div>
+		        <div class="col-sm-9">
+		        </div>
+	    	</div>
+		</div>
+</div>
+<div class="col-lg-10">
+	<div class="col-lg-12">
+		<div class = "table-responsive col-lg-12">
+		<h3><p class="text-info text-center text-large">Registro de Usuarios</p></h3>
+		<br>
+		<b>Cantidad de registros</b> : {{ lista|length }}
+		<br><br>
+		<!--<a href="" class="btn btn-warning"><span class="glyphicon glyphicon-search"></span> Filtrar</a>-->
+		<!-- BOTON PARA BUSCAR POR CAMPO -->
+		<div class="form-group">
+			<a href="#nuevo_usuario_modal" id="nuevo_usuario" class="text-success" data-toggle="modal" role="button"><span class="text-success glyphicon glyphicon-plus"></span> Agregar Usuario</a>
+			<div class="col-lg-6 pull-right">
+			    <div class="input-group">
+			      <input type="text" class="form-control  pull-rigth" id="texto_busqueda">
+			      <div class="input-group-btn">
+			        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-search"></span></button>
+			        <ul class="dropdown-menu pull-right">
+			          <li><a href="#" id="buscarPorNombre">Usuario</a></li>
+			          <li><a href="#" id="mostrarTodos">Mostrar todos</a></li>
+			          
+			        </ul>
+			      </div><!-- /btn-group -->
+			    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-6 -->
+			
+
+		</div>
+		<!-- FIN DE BOTON PARA BUSCAR POR CAMPO -->
+		<br>
+		<table class="table table-condensed" id="tabla" name="tabla">
+			<thead style="background-color: #222; color: #FAFAFA;">
+				<tr>
+					<th class="text-center" style="width:10%;">Código</th>
+					<th class="text-center" style="width:25%;">Apellidos</th>
+					<th class="text-center" style="width:25%;">Nombres</th>
+					<th class="text-center" style="width:20%;">Usuario</th>
+					<th class="text-center" style="width:10%;">Nivel</th>
+					<th class="text-center" style="width:10%;">Ingreso</th>
+					
+				</tr>
+			</thead>
+			<tbody style="background-color: #fff; color:#254; border:0;" id="lista_usuarios">		
+			{% for obj in  lista %}
+				<tr id="tr{{obj.id}}" class="text-info">
+					<td class="text-center">{{ obj.pk }}</td>
+					<td class="nombre">{{obj.last_name}}</center></td>
+					<td >{{obj.first_name}}</td>
+					<td >{{obj.username}}</td>
+					<td >{{obj.tipoUsuario}}</td>
+					<td >{{obj.fecIngreso|date:"d-m-Y"}}</td>
+					<td ><a href="#" class="editar_registro" codigo="{{obj.pk}}" modelo="0"><span class="text-warning glyphicon glyphicon-pencil"></span></a></td>
+					<td ><a href="#" class="eliminar_registro" codigo="{{obj.pk}}" modelo="0"><span class="text-danger glyphicon glyphicon-trash"></span></a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+		<div class="hide alert alert-warning" id="div_mensaje">
+			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true" id="false">&times;</button>
+			  <p id="mensaje"></p>
+		</div>
+		</div>
+	</div>
+</div>	
+	
+
+
+
+{% endblock %}

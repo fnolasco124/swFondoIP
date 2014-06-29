@@ -1,0 +1,503 @@
+{% extends "base3.html"%}
+{% block js%}
+<script src="/media/js/fipValidacion.js"></script>
+ <script src="/media/js/bootstrap-collapse.js"></script>
+ <script src="/media/js/otro.js"></script>
+ <style type="text/css">
+  .modal{
+    width:100%; /*Toma el 100% del ancho de la página*/
+    height:100% auto; /*Toma el 100% del alto de la página*/
+    position:fixed; /*Con este código hacemos que el contenedor se mantenga en la pantalla y para que tome las dimensiones del body y no de la entrada*/
+    background-color: rgba(25, 0, 0, 0.01); /*Color de fondo, incluye opacidad del 90%*/
+    top:0; /*Position superior*/
+    left:0; /*Posición lateral*/
+    z-index:9999; /*Evitamos que algún elemento del blog sobreponga la ventana modal*/
+  }
+  .modal-dialog{
+    top:20px;
+    margin:100px auto; /*Separación arriba y centrado*/
+    font-size:12px; /*Tamaño de la fuente*/
+    widows: 4px;0%; /*Ancho del contenedor*/
+    height:100% auto;
+    width: 1200px;
+    /*text-align:center; /*Alineación del texto*/
+    color:#222; /*Color del texto*/
+    background:#000; /*Color de fondo*/
+  }
+  .modal-dialog2{
+    top:20px;
+    margin:100px auto; /*Separación arriba y centrado*/
+    font-size:13px; /*Tamaño de la fuente*/
+    widows: 4px;0%; /*Ancho del contenedor*/
+    height:100% auto;
+    width: 1000px;
+    color:#222; /*Color del texto*/
+    background:#000; /*Color de fondo*/
+  }
+  .modal-content{
+    color:#1c1c10; /*Color del texto*/
+    background:#fffffe; /*Color de fondo*/
+    height:100%;
+    border:20px;
+    font-size:13px; /*Tamaño de la fuente*/
+    border-radius: 0px;
+  }
+  .modal-header{
+    color:#fff; /*Color del texto*/
+    background:#383821; /*Color de fondo*/
+    text-align:center; /*Alineación del texto*/
+    font-size:16px; /*Tamaño de la fuente*/
+    height:50px;
+  }
+  .modal-header .close{
+    color:#FFF; /*Color de fondo*/
+    font-size:20px;
+    opacity: 0.2;
+  }
+  .modal-footer{
+    color:#FFF; /*Color de fondo*/
+    font-size:20px;
+    opacity: 0.9;
+    background:#333;
+    
+    
+  }
+  
+</style>
+ {% endblock %}
+{% block contenido %}
+{% include 'base/frmModalSelecCliente.html'%}
+<!--
+{% include 'base/frmModAgregarColaborador.html'%}
+{% include 'base/frmModAgregarModificatoria.html'%}
+-->
+<!-- MENU DEL LADO DERECHO -->
+<div class="col-lg-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-cog"></span> Administración</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="{% url "vista_TablasMaestro"%}"><span class="glyphicon glyphicon-list-alt text-info"></span> Tablas Maestro</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="{% url "vista_Usuario"%}"><span class="glyphicon glyphicon-user text-info"></span> Usuarios</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="{% url "vista_Personal"%}"><span class="glyphicon glyphicon-th text-info"></span> Personal</a> 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="{% url "vista_UEjecutora"%}"><span class="glyphicon glyphicon-record text-info"></span> Unidades Ejecutoras</a> 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="{% url "vista_Derivacion"%}"><span class="glyphicon glyphicon-transfer text-info"></span> Derivaciones</a> 
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-send"></span> Tramite Documentario</a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tbody><tr>
+                                        <td>
+                                            <a href="{% url "vista_Protocolo"%}"><span class="glyphicon glyphicon-plus text-info"></span> Nuevo Protocolo</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="{% url "vista_Convenios" 1%}"><span class="glyphicon glyphicon-file text-info"></span> Convenios</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="{% url "vista_Bandeja" 1%}"><span class="glyphicon glyphicon-tasks text-info"></span> Bandeja de Entrada</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="{% url "vista_LocalizarProtocolo"%}"><span class="glyphicon glyphicon-search text-info"></span> Localizar</a>
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                <span class="glyphicon glyphicon-edit"></span> Supervisión</a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="{% url "vista_Convenio_Supervisor"%}"><span class="glyphicon glyphicon-book text-info"></span> Convenios</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="#"><span class="glyphicon glyphicon-asterisk text-info"></span> Actividad 2</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="#"><span class="glyphicon glyphicon-asterisk text-info"></span> Actividad 3</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="#"><span class="glyphicon glyphicon-asterisk text-info"></span> Actividad 4</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th"></span> Unidad Ejecutora</a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tbody><tr>
+                                        <td>
+                                            <a href="{% url "vista_Cargar_Presupuesto"%}"><span class="glyphicon glyphicon-upload text-info"></span> Cargar Presupuesto</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="{% url "vista_Presupuesto"%} "><span class="glyphicon glyphicon-refresh text-info"></span> Presupuesto</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#"><span class="glyphicon glyphicon-usd text-info"></span> Rendición de cuentas</a>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody></table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-sm-9">
+            </div>
+        </div>
+    </div>
+  
+</div>
+<div class = "col-lg-7">
+<form method="POST" class="form-horizontal" role="form" name="frmConvenio" id = "frmConvenio" enctype="multipart/form-data">
+{% csrf_token %}
+<div class="form-group">
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#383821; color:#fff;">
+                <center>Datos del Convenio</center>
+            </div>
+            <div class="panel-body">
+                           
+                    <div class="form-group">
+                        <label class="hide col-lg-2  control-label">Codigo</label>
+                        <div class=" hide col-lg-4">
+                          <input type="text" class="form-control" id="idMProy" name="idMProy" placeholder = "Código autogenerado">
+                        </div>
+                        <label class="hide col-lg-2  control-label">Estado</label>
+                        <div class=" hide col-lg-4">
+                          <select name="idEstMProy" id="idEstMProy" class="form-control">
+                              <option value="">Seleccione...</option>
+                              <option value="0">Inicio</option>
+                              <option value="1">Ejecutado</option>
+                              <option value="2">Cerrado</option>
+                          </select>
+                        </div>
+                        <label class="col-lg-2 control-label">Convocatoria</label>
+                        <div class="col-lg-4">
+                          <select name="idConv" id="idConv" class="form-control">
+                              <option value="">Seleccione...</option>
+                              <option value="2010">2007</option>
+                              <option value="2010">2010</option>
+                              <option value="2011">2011</option>
+                              <option value="2012">2012</option>
+                              <option value="2013">2013</option>
+                              <option value="2014">2014</option>
+                          </select>
+                        </div>
+                    </div>
+                      
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Unidad Ejecutora</label>
+                        <div class="col-lg-9">
+                          <input type="text" class="hide form-control" name="idMCli" id="idMCli">
+                          <input type="text" class="form-control" disabled="disabled" name="nomMCli" id="nomMCli" placeholder = "Nombre de la Unidad Ejecutora"> 
+                        </div> 
+                        <a href="#seleccionarUnidadEjecutora" data-toggle="modal" class="btn btn-danger bnt-lg glyphicon glyphicon-search" style="color:#fff;"></a>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Nombre del Proyecto</label>
+                        <div class="col-lg-10">
+                          <input type="text" class="form-control" name="nomMProy" id="nomMProy" placeholder = "Nombre del proyecto">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Tipo de Proyecto</label>
+                        <div class="col-lg-4">
+                          <select name="idTipProMProy" id="idTipProMProy" class="form-control">
+                              <option value="">Seleccione...</option>
+                              <option value="0">Tipo 1</option>
+                              <option value="1">Tipo 2</option>
+                              <option value="2">Tipo 3</option>
+                          </select>
+                        </div>
+                        <label class="col-lg-2 control-label">Sector</label>
+                        <div class="col-lg-4">
+                          <select name="idSector" id="idSector" class="form-control">
+                              <option value="">Seleccione...</option>
+                              {% for s in lstSector %}
+                              <option value="{{s.pk}}">{{s.pk}} - {{s.NomDTab}}</option>
+                              {% endfor %}
+                              <option value="2">Default...</option>
+                          </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Banco</label>
+                        <div class="col-lg-3">
+                          <select name="idBanco" id="idBanco" class="form-control">
+                              <option value="">Seleccione...</option>
+                              {% for b in lstBancos %}
+                              <option value="{{b.pk}}">{{b.pk}} - {{b.NomDTab}}</option>
+                              {% endfor %}
+                              <option value="2">SeleccioneAS</option>
+                          </select>
+                        </div>
+
+                        <label class="col-lg-3 control-label">Cod. Cuenta Interbancaria</label>
+                        <div class="col-lg-4">
+                          <input type="text" class="form-control" id="numCtaInterMProy" name="numCtaInterMProy" placeholder = "Código de cuenta interbancaria">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">PDF Proyecto</label>
+                        <div class="col-lg-4">
+                          {{form.RutaPDFMProy}}
+                            <!--<input type="file" class="form-control" id="rutaPDFDProt"  name="rutaPDFDProt" placeholder="Buscar la Unidad Ejecutora">-->
+                        </div>
+                                            
+                    </div>
+
+                   
+
+                    <div class="hide form-group">
+                        <label class="col-lg-2 control-label">OCR A. CIERRE</label>
+                        <div class="col-lg-10">
+                          {{form.RutaOCRACMProy}}
+                            <!--<input type="file" class="form-control" id="rutaOCRDProt"  name="rutaOCRDProt" placeholder="Buscar la Unidad Ejecutora">-->
+                        </div>                    
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">PDF Convenio</label>
+                        <div class="col-lg-4">
+                          {{form.RutaPDFConvMProy}}
+                          
+                            <!--<input type="file" class="form-control" id="rutaOCRDProt"  name="rutaOCRDProt" placeholder="Buscar la Unidad Ejecutora">-->
+                        </div>            
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label">PDF Acta de Cierre</label>
+                        <div class="col-lg-5">
+                          {{form.RutaPDFACMProy}}
+                            <!--<input type="file" class="form-control" id="rutaPDFDProt"  name="rutaPDFDProt" placeholder="Buscar la Unidad Ejecutora">-->
+                        </div>    
+                       
+
+                        <label class="col-lg-2 control-label">Fecha Firma</label>
+                        <div class="col-lg-3 pull-right">
+                          <input type="date" class="form-control text-right" name="fecFirmaMProy" id="fecFirmaMProy" placeholder="yyyy-mm-dd">
+                        </div>
+                    </div>
+                      
+            </div>
+        </div>
+
+        
+
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#383821; color:#fff;">
+                <center>Financiamiento</center>
+            </div>
+            <div class="panel-body">
+                
+                    <div class="form-group">
+                      
+                      <label class="col-lg-2 control-label"><center></center></label>
+                      <label class="hide col-lg-2 control-label"><center>%</center></label>
+                      <label class="col-lg-2 control-label"><center>FIP</center></label>
+                      <label class="col-lg-2 control-label"><center>Un. Ejec. </center></label>
+                      <label class="col-lg-2 control-label"><center>Asoc. </center></label>
+                      <label class="col-lg-2 control-label"><center>TOTAL</center></label>
+                    </div>
+                  
+                    <div class="hide form-group">
+                      <label class="col-lg-1 control-label"><center></center></label>
+                      <label class="col-lg-2 control-label">ESPERADO</label>
+                      
+                      <div class="col-lg-2">
+                        <input type="numeric" class="form-control text-right" name="" id="" placeholder = "0,000.00">
+
+                      </div>
+                      <div class="col-lg-2">
+                        <input type="numeric" class="form-control text-right" name="montInvFipMProy" id="montInvFipMProy" placeholder = "0,000.00">
+                      </div>
+                      <div class="col-lg-2">
+                        <input type="numeric" class="form-control text-right" name="montInvCliMProy" id="montInvCliMProy" placeholder = "0,000.00">
+                      </div>
+                      <div class="col-lg-2">
+                        <input type="numeric" class="form-control text-right" name="montTotMProy" id="montTotMProy" placeholder = "0,000.00">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      
+                      <label class="col-lg-2 control-label">REAL</label>
+                      <div class="hide col-lg-2">
+                        <input type="text" class=" form-control text-right" disabled="disabled" name="" id="" placeholder = "0.0">
+                      </div>
+                      <div class="col-lg-2">
+                        <input type="text" class="form-control text-right montoReal" name="montTInvRealFipMProy" id="montTInvRealFipMProy" value = "0">
+                      </div>
+                      <div class="col-lg-2">
+                        <input type="text" class="form-control text-right montoReal" name="montTInvRealCliMProy" id="montTInvRealCliMProy" value = "0">
+                      </div>
+                      <div class="col-lg-2">
+                        <input type="text" class="form-control text-right montoReal" name="montTInvRealOtrMProy" id="montTInvRealOtrMProy" value = "0">
+                      </div>
+                      <div class="col-lg-2">
+                        <input type="text" class="form-control text-right" name="montTotRealMProy" id="montTotRealMProy" style="color:#FF0000" value="0">
+                      </div>
+                    </div>
+
+                    <div class="form-group  hide">
+                      
+                      <label class="col-lg-2 control-label">ADENDAS</label>
+                      <div class="hide col-lg-2">
+                        <input type="text" class="form-control text-right" disabled="disabled" name="" id="" placeholder = "0.0">
+                      </div>
+                      <div class="col-lg-2">
+                        <input type="text" class="form-control text-right montoAdendas" name="montTotAdeFipMProy" id="montTotAdeFipMProy" value = "0">
+                      </div>
+                      <div class="col-lg-2">
+                        <input type="text" class="form-control text-right montoAdendas" name="montTotAdeCliMProy" id="montTotAdeCliMProy" value = "0">
+                      </div>
+                      <div class="col-lg-2">
+                        <input type="text" class="form-control text-right montoAdendas" name="montTotAdeOtrMProy" id="montTotAdeOtrMProy" value = "0">
+                      </div>
+                      <div class="col-lg-2">
+                        <input type="text" class="form-control text-right" name="montTotAdeTotMProy" id="montTotAdeTotMProy" style="color:#FF0000" value="0">
+                      </div>
+                    </div>
+          
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#383821; color:#fff;">
+                <center>Cronograma</center>
+            </div>
+            <div class="panel-body">
+
+                    <div class="form-group">
+                      
+                      <label class="col-lg-2 control-label"></label>
+                      <label class="col-lg-3 control-label"><center>Inicio</center></label>
+                      <label class="col-lg-3 control-label"><center>Fin</center></label>
+                      <label class="hide col-lg-3 control-label"><center>Entrega</center></label>
+                    </div>
+                  
+                    <div class="hide form-group">
+                      <label class="col-lg-2 control-label">Esperado</label>
+                      <div class="col-lg-3">
+                        <input type="date" class="form-control" name="fecIniMProy" id="fecIniMProy" placeholder="yyyy-mm-dd">
+                      </div>
+                      <div class="col-lg-3">
+                        <input type="date" class="form-control" name="fecFinMProy" id="fecFinMProy" placeholder="yyyy-mm-dd">
+                      </div>
+                      <div class="col-lg-3">
+                        <input type="date" class="form-control" name="fecEntMProy" id="fecEntMProy" placeholder="yyyy-mm-dd">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label">Fecha</label>
+                      <div class="col-lg-3">
+                        <input type="date" class="form-control text-right" name="fecIniRealMProy" id="fecIniRealMProy" placeholder="yyyy-mm-dd">
+                      </div>
+                      <div class="col-lg-3">
+                        <input type="date" class="form-control text-right" name="fecFinRealMProy" id="fecFinRealMProy" placeholder="yyyy-mm-dd">
+                      </div>
+                      <div class="hide col-lg-3">
+                        <input type="date" class="form-control text-right" name="fecEntRealMProy" id="fecEntRealMProy" placeholder="yyyy-mm-dd">
+                      </div>
+                      <div class="hide col-lg-3">
+                        <input type="text" class="form-control text-right" name="tiempoMProy" id="tiempoMProy" value="0">
+                      </div>
+                    </div>
+                  
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+                <button type="submit" class="btn btn-success" id="btnGrabar"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
+                <a href="{% url "vista_Convenios" 1%}" class="btn btn-danger" id="btnCancelar" style="color:#fff;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+            </div>
+        </div>
+    </div>    
+</div>
+
+</form>
+</div>
+
+{% endblock %}

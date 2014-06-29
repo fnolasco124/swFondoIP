@@ -1,0 +1,417 @@
+{% extends 'base3.html' %}
+{% block js%}
+<script src="/media/js/otro.js"></script>
+<!--<script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>-->
+
+<style type="text/css">
+	p {line-height: 50%;}
+  	.modal{
+		width:100%; /*Toma el 100% del ancho de la página*/
+		height:100% auto; /*Toma el 100% del alto de la página*/
+		position:fixed; /*Con este código hacemos que el contenedor se mantenga en la pantalla y para que tome las dimensiones del body y no de la entrada*/
+		background-color: rgba(25, 0, 0, 0.01); /*Color de fondo, incluye opacidad del 90%*/
+		top:0; /*Position superior*/
+		left:0; /*Posición lateral*/
+		z-index:9999; /*Evitamos que algún elemento del blog sobreponga la ventana modal*/
+	}
+	
+	.modal-dialog{
+		top:20px;
+		margin:100px auto; /*Separación arriba y centrado*/
+		font-size:12px; /*Tamaño de la fuente*/
+		widows: 4px;0%; /*Ancho del contenedor*/
+		height:100% auto;
+
+		/*text-align:center; /*Alineación del texto*/
+		color:#222; /*Color del texto*/
+		background:#000; /*Color de fondo*/
+	}
+	.modal-dialog2{
+		top:20px;
+		margin:100px auto; /*Separación arriba y centrado*/
+		font-size:13px; /*Tamaño de la fuente*/
+		widows: 4px;0%; /*Ancho del contenedor*/
+		height:100% auto;
+		width: 1200px;
+		color:#222; /*Color del texto*/
+		background:#000; /*Color de fondo*/
+	}
+	.modal-content{
+		color:#1c1c10; /*Color del texto*/
+		background:#fffffe; /*Color de fondo*/
+		height:100%;
+		border:20px;
+		font-size:13px; /*Tamaño de la fuente*/
+		border-radius: 0px;
+	}
+	.modal-header{
+		color:#fff; /*Color del texto*/
+		background:#383821; /*Color de fondo*/
+		text-align:center; /*Alineación del texto*/
+		font-size:16px; /*Tamaño de la fuente*/
+		height:50px;
+	}
+	.modal-header .close{
+		color:#FFF; /*Color de fondo*/
+		font-size:20px;
+		opacity: 0.2;
+	}
+	.modal-footer{
+		color:#FFF; /*Color de fondo*/
+		font-size:20px;
+		opacity: 0.9;
+		background:#333;
+		
+		
+	}
+	
+</style>
+{% endblock%}
+{% block contenido %}
+
+{% include 'base/frmModalDestino.html' %}	
+{% include 'base/frmModDetalleProtocolo.html' %}
+{% include 'base/frmModDetalleReferencia.html' %}
+<div>
+	<div class="col-lg-2">
+		<div class="container">
+		    <div class="row">
+		        <div class="col-sm-3">
+		            <div class="panel-group" id="accordion">
+		                <div class="panel panel-default">
+		                    <div class="panel-heading">
+		                        <h4 class="panel-title">
+		                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-cog"></span> Administración</a>
+		                        </h4>
+		                    </div>
+		                    <div id="collapseOne" class="panel-collapse collapse">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tbody>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_TablasMaestro"%}"><span class="glyphicon glyphicon-list-alt text-info"></span> Tablas Maestro</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Usuario"%}"><span class="glyphicon glyphicon-user text-info"></span> Usuarios</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Personal"%}"><span class="glyphicon glyphicon-th text-info"></span> Personal</a> 
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_UEjecutora"%}"><span class="glyphicon glyphicon-record text-info"></span> Unidades Ejecutoras</a> 
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Derivacion"%}"><span class="glyphicon glyphicon-transfer text-info"></span> Derivaciones</a> 
+		                                    </td>
+		                                </tr>
+		                            </tbody></table>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-default">
+		                    <div class="panel-heading">
+		                        <h4 class="panel-title">
+		                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-send"></span> Tramite Documentario</a>
+		                        </h4>
+		                    </div>
+		                    <div id="collapseThree" class="panel-collapse collapse in">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tbody><tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Protocolo"%}"><span class="glyphicon glyphicon-plus text-info"></span> Nuevo Protocolo</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Convenios" 1%}"><span class="glyphicon glyphicon-file text-info"></span> Convenios</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Bandeja" 1%}"><span class="glyphicon glyphicon-tasks text-info"></span> Bandeja de Entrada</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_LocalizarProtocolo"%}"><span class="glyphicon glyphicon-search text-info"></span> Localizar</a>
+		                                    </td>
+		                                </tr>
+		                            </tbody></table>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-default">
+		                    <div class="panel-heading">
+		                        <h4 class="panel-title">
+		                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+		                            <span class="glyphicon glyphicon-edit"></span> Supervisión</a>
+		                        </h4>
+		                    </div>
+		                    <div id="collapseFour" class="panel-collapse collapse">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tbody>
+		                                    <tr>
+		                                        <td>
+		                                            <a href="{% url "vista_Convenio_Supervisor"%}"><span class="glyphicon glyphicon-book text-info"></span> Convenios</a>
+		                                        </td>
+		                                    </tr>
+		                                    <tr>
+		                                        <td>
+		                                            <a href="#"><span class="glyphicon glyphicon-asterisk text-info"></span> Actividad 2</a>
+		                                        </td>
+		                                    </tr>
+		                                    <tr>
+		                                        <td>
+		                                            <a href="#"><span class="glyphicon glyphicon-asterisk text-info"></span> Actividad 3</a>
+		                                        </td>
+		                                    </tr>
+		                                    <tr>
+		                                        <td>
+		                                            <a href="#"><span class="glyphicon glyphicon-asterisk text-info"></span> Actividad 4</a>
+		                                        </td>
+		                                    </tr>
+		                                </tbody>
+		                            </table>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-default">
+		                    <div class="panel-heading">
+		                        <h4 class="panel-title">
+		                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th"></span> Unidad Ejecutora</a>
+		                        </h4>
+		                    </div>
+		                    <div id="collapseTwo" class="panel-collapse collapse">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tbody><tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Cargar_Presupuesto"%}"><span class="glyphicon glyphicon-upload text-info"></span> Cargar Presupuesto</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="{% url "vista_Presupuesto"%} "><span class="glyphicon glyphicon-refresh text-info"></span> Presupuesto</a>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                        <a href="#"><span class="glyphicon glyphicon-usd text-info"></span> Rendición de cuentas</a>
+		                                    </td>
+		                                </tr>
+		                                
+		                            </tbody></table>
+		                        </div>
+		                    </div>
+		                </div>
+		                
+		            </div>
+		        </div>
+		        <div class="col-sm-9">
+		        </div>
+	    	</div>
+		</div>
+
+	</div>
+	
+	<div class="col-lg-10">
+		<div class="">
+			<div class="form-group">
+				<div class="col-lg-9">
+
+					<h3><p class="text-info text-center text-large">Bandeja de Entrada</p></h3>
+					<br>
+					<b>Cantidad de protocolos</b> : {{ lista|length }}
+					<br>
+					<!--<a href="#" mi="esto es el valor de mio" id="mio" name="mio">esto es mio</a>-->
+					<!-- BOTON PARA BUSCAR POR CAMPO -->
+					<div class="form-group">
+						<div class="col-lg-6 pull-right">
+						    <div class="input-group">
+						 	    <input type="text" class="form-control pull-rigth" id="texto_busqueda" placeholder = "Ingrese texto a buscar y seleccione el campo">
+						      	
+						      	<div class="input-group-btn">
+						        	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-search"></span>
+						        	</button>
+						        	<ul class="dropdown-menu pull-right">
+								        <li><a href="#" id="buscarPorProtocolo">Protocolo</a></li>
+								        <li><a href="#" id="buscarPorProyecto">Convenio</a></li>
+								        <li><a href="#" id="buscarPorUnidadEjecutora">Unidad Ejecutora</a></li>
+								        <li><a href="#" id="buscarPorEnviado">Enviado Por</a></li>
+								        <!--<li class="divider"></li>-->
+								        <li><a href="#" id="buscarPorReferencia">Referencia</a></li>
+								        <li><a href="#" id="mostrarTodos">Mostrar Todos</a></li>
+						        	</ul>
+						      	</div><!-- /btn-group -->
+						    </div><!-- /input-group -->
+						</div><!-- /.col-lg-6 -->
+					</div>
+
+					<br>
+					<br>
+
+					<form method= "POST" action="." class="form-horizontal" role="form" name="frmBandeja" id ="frmBandeja">
+						{% csrf_token %}
+						<div class="form-group">
+							<label class="col-lg-2 control-label text-right" id="log">Derivar a</label>
+							<div class="col-lg-8">
+								<input type="text" class="hide form-control" id="txtDestino" name="txtDestino">
+								<input type="text" class="form-control" id="txtUsuario" name="txtUsuario" placeholder="Seleccione los usuarios">
+							</div>
+							<a href="#seleccionarDestino" data-toggle="modal" class="btn btn-default"><span class="glyphicon glyphicon-list-alt"></span></a>
+							<button type="submit" class="btn btn-danger" id="btnEnviar" name="btnEnviar" ><span class="glyphicon glyphicon-envelope"></span> Enviar</button>
+
+						</div>
+
+						<div class="form-group">
+							<label class="col-lg-2 control-label text-right">Mensaje</label>
+							<div class="col-lg-10">
+
+								<textarea rows="3" class="form-control" id="txtMensaje" name="txtMensaje" placeholder="Ingrese un mensaje para los destinatarios"></textarea>
+							</div>
+							
+						</div>
+						<div class="form-group">
+							<div class="col-lg-2">
+								<input style="color:#d9534f;" class="select pull-right" type="checkbox" name = "chkObservar" id ="chkObservar" />
+							</div>
+							<label  class="col-lg-5 text-dnager" style="color:#d9534f;font-size:18px;">Observar protocolo</label>
+							<input class="hide col-lg-2" type="text" name = "protObservado" id ="protObservado" value="0"/>
+						</div>
+
+						<div class="hide form-group">
+							<label class="col-lg-2 control-label text-right">Seleccionados</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="txtProtocolo" name="txtProtocolo">
+							</div>
+							
+						</div>
+					</form>
+					
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3" >
+					<div>
+						<p style= "color:#FF0000; font-weight:bold">Documentos adjuntos:</p>
+					</div>
+
+					<div class="list-group" target="_blank" id ="lstDocs" name ="lstDocs" style="color:#ff00ff;">
+					
+					</div>		
+				</div>
+				
+			</div>
+		</div>
+		
+		<!-- Inicia la tabla -->
+
+		<div class="col-lg-12">
+			
+			<table class="table table-condensed" id="tabla" name="tabla" border="0">
+			<thead style="background-color: #222; color: #FAFAFA;">
+				<tr>
+					<th class="text-center" style="width:8%;"></th>
+					<th class="text-center" style="width:10%;">Protocolo</th>
+					<th class="text-center" style="width:30%;">Convenio</th>
+					<th class="text-center" style="width:20%;">Unidad Ejecutora</th>
+					<th class="text-center" style="width:10%;">Enviado Por</th>
+					<th class="text-center" style="width:10%;">Fecha</th>
+					<th class="text-center" style="width:10%;">Referencia</th>
+					
+				</tr>
+			</thead>
+			
+			{% for obj in  bandejas %}
+			{% if obj.EstAccion == '1' and obj.EstObservado == '0' %}
+			<tbody style="background-color: #E3FBE9; color:#254; ">
+			{% elif obj.EstObservado == '1' and obj.EstAccion == '1' %}
+			<tbody style="background-color: #E6AAAA; color:#254;">
+			{% elif obj.EstObservado == '0' and obj.EstAccion == '0' %}
+			<tbody style="background-color: #FFFFFF; color = #254;">
+			{% elif obj.EstAccion == '0' and obj.EstObservado == '1' %}
+			<tbody style="background-color: #FFFFFF;font-size:14px;color:#FF0000;">
+			{% endif %}
+
+				<tr id="tr{{obj.IdBandeja}}" style="">
+					<td>
+						
+						<input class="select" type="checkbox" name = "chk[]" id ="chk" value="{{obj.IdBandeja}}"/>
+						<a href="#" class="mensaje btn btn-default btn-xs" id="mensajeBandeja" cod="" title="{{obj.MenBProt}}">
+							<span class="glyphicon glyphicon-comment" id=""></span>
+						</a>
+						<a href="/tramite/detalleprotocolo/{{obj.IdMProt}}/" class="mensaje btn btn-default btn-xs" cod="{{obj.IdMProt}}" title="Adjuntar detalle a Protocolo">
+							<span class="glyphicon glyphicon-pencil" id="btnObservarBandeja"></span>
+						</a> 
+
+					</td>
+					{% if obj.EstAccion == '0' and obj.EstObservado == '1' %}
+					<td class="protocolo"><a href="#" id="" class="btnDetalle" codigo="{{obj.IdMProt}}"  style="color:#FF0000;">{{obj.IdMProt}}</a></td>
+					<td class="nombre"><a href="#" id="" class="btnDetalleProtocolo"   codigo="{{obj.IdMProt}}"  style="color:#FF0000;">{{obj.ProyBProt}}</a></td>
+					
+					{% else %}
+					<td class="protocolo"><a href="#" id="" class="btnDetalle" codigo="{{obj.IdMProt}}"  style="color:#585858;">{{obj.IdMProt}}</a></td>
+					<td class="nombre"><a href="#" id="" class="btnDetalleProtocolo"   codigo="{{obj.IdMProt}}"  style="color:#585858;" title="{{obj.ProyBProt}}">{{obj.ProyBProt|default:"--"|truncatechars:55}}</a></td>
+					
+					{% endif %}
+
+					<td class="cliente" title="{{obj.CliBProt}}">{{obj.CliBProt|default:"--"|truncatechars:40}}</td>
+					<td class="enviadoPor">{{obj.NomMUsuEnv}}</td>
+					<td>{{obj.FecEnv|date:'Y-m-d'}}</td>
+					
+					<td class="referencia"><a href="#" id="" class="btnDetalleReferencia"  codigo="{{obj.IdProtRef}}"  style="color:#585858;">{{obj.IdProtRef|default:"--"|truncatechars:70}}</a></td>
+
+					
+					
+				</tr>
+
+			</tbody>
+			{% endfor %}
+
+		</table>
+
+		{% if bandejas %}
+		<div class="pagination">
+			<ul class="pagination">
+				<li><a href="/tramite/bandeja/page/1/"> << </a></li>
+			{% if bandejas.has_previous %}
+				<li><a href="/tramite/bandeja/page/{{bandejas.previous_page_number}}/"> Anterior </a></li>
+			{% else %}
+				<li><a href="#"> Anterior </a></li>
+			{% endif %}
+			{% if bandejas.has_next %}
+				<li><a href="/tramite/bandeja/page/{{bandejas.next_page_number}}/"> Siguiente </a></li>
+			{% else %}
+				<li><a href="#"> Siguiente </a></li>
+			{% endif %}
+				<li><a href="/tramite/bandeja/page/{{bandejas.paginator.num_pages}}/"> >> </a></li>
+
+			</ul>
+			<h4>Pagina {{bandejas.number }} de {{bandejas.paginator.num_pages}}</h4>
+		
+		</div>
+		{% endif%}
+		
+	</div>
+</div>	
+	
+	
+
+
+
+
+		
+	
+
+{% endblock %}

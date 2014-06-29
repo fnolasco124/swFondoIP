@@ -1,0 +1,43 @@
+<div class="modal fade" id="seleccionarDestino"tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id = 'false'>&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Seleccione usuario(s) a derivar</h4>
+      </div>
+      
+      <div class="modal-body">
+        <div style="height:350px;width:550px; overflow:scroll;">
+              <table class="table" id="tabla" name="tabla" style="border:1px solid #220; width:450px;" align="center">
+                    <thead style="border:1px solid #220;">
+                      <tr style="border:1px solid #220;">
+                        <!--<th><input type="checkbox"></th>
+                        <th><center>Usuarios </center></th>-->
+                        
+                      </tr>
+                    </thead>
+                  
+                    {% for obj in  listaUsuario %}
+                    <tbody style="border:1px solid #220; width:100px" >
+                      <tr id="tr{{obj.pk}}" style="border:1px solid #220;">
+                        <td style="border:1px solid #220; width:10px;"><input class="select" type="checkbox" id="destino[]" name="destino[]" cod="{{obj.pk}}" nom="{{obj.username}}"/> </td>
+                        <td style="border:1px solid #220;">{{obj.last_name|upper}}, {{obj.first_name|capfirst}}</td>
+                      </tr>
+
+                    </tbody>
+                    {% endfor %}
+
+              </table>
+              <br>
+
+                                   
+                           
+      </div>
+       <a href="#" class="destino btn btn-danger" id="btnFinalizarDestino" style="float:right;"><span class="glyphicon glyphicon-ok" ></span> Cerrar</a>    
+    </div>
+    </div>
+  </div>
+</div>
+
+

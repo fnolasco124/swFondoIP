@@ -1,0 +1,166 @@
+{% extends 'base3.html' %}
+{% block js%}
+<script src="/media/js/fipValidacion.js"></script>
+{% endblock %}
+{% block contenido %}
+    
+    <div class="col-lg-1">
+        
+    </div>
+    
+    <div class="container col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#383821; color:#fff;">
+                <center><b>Documentos adjuntos</b></center>
+            </div>
+                    
+            <div class="panel-body">
+        
+        
+        <form method= "POST" action="" class="form-horizontal" role="form" name="frmModificatoria" id ="frmModificatoria" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Nº de Convenio</label>
+                    <div class="col-lg-4">
+                      <input type="text" class="hide form-control" id="codProyecto"  name="codProyecto" value="{{objMP.IdMProy}}">
+                      <label class="form-control" id="codProyecto"  name="codProyecto" style="color:#FF0000"> {{objMP.IdMProy}}</label>
+                    </div>  
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Unidad Ejecutora</label>
+                    <div class="col-lg-10">
+                      <label class="form-control" style="color:#FF0000">{{objMP.IdMCli.NomMCli|upper}}</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Nombre del Proyecto</label>
+                    <div class="col-lg-10">
+                      <label class="form-control" style="color:#FF0000">{{objMP.NomMProy|upper}}</label>
+                    </div>  
+                </div>
+
+                
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Tipo Documento</label>
+                    <div class="col-lg-4">
+                        <select type="select" class="form-control" id="idTipDocDProy"  name="idTipDocDProy" placeholder="">
+                              <option value="">Seleccione</option>
+                              {% for ta in lstTipAdenda%}
+                              <option value="{{ta.id}}">{{ta.NomDTab}}</option>
+                              {% endfor %}
+                              <option value="2">Default</option>
+                      </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Descripción</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" id="descDProy"  name="descDProy">
+                    </div>  
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Fecha Firma</label>
+                    <div class="col-lg-4">
+                        <input type="date" class="form-control" id="fecFirmaDProy"  name="fecFirmaDProy" placeholder="yyyy-mm-dd">
+                    </div>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Fecha Inicio</label>
+                    <div class="col-lg-4">
+                        <input type="date" class="form-control" id="fecIniDProy"  name="fecIniDProy" placeholder="yyyy-mm-dd">
+                    </div>
+                    <label class="col-lg-2 control-label">Fecha Fin</label>
+                    <div class="col-lg-4">
+                        <input type="date" class="form-control" id="fecFinDProy"  name="fecFinDProy" placeholder="yyyy-mm-dd">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Inversión FIP</label>
+                    <div class="col-lg-4">
+                      <input type="text" class="form-control text-right" id="montAportFIPDProy"  name="montAportFIPDProy" value="0">
+                    </div>  
+                    <label class="col-lg-2 control-label">Inversión UE</label>
+                    <div class="col-lg-4">
+                      <input type="text" class="form-control text-right" id="montAportCliDProy"  name="montAportCliDProy" value="0">
+                    </div>
+                </div>
+                  
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Inversión Asociados</label>
+                    <div class="col-lg-4">
+                      <input type="text" class="form-control text-right" id="montAportOtrDProy"  name="montAportOtrDProy" value="0">
+                    </div>
+                    <label class="col-lg-2 control-label">PDF</label>
+                    <div class="col-lg-4">
+                        {{form.RutaPDFDProy}}
+                        
+                    </div>                    
+                </div>
+                  
+                  <div class="form-group">
+                    <div class="col-lg-offset-5 col-lg-12">
+                      
+                      <button type="submit" class="btn btn-success" id="btnAgregarModificatoria" name="btnAgregarModificatoria"><span class="glyphicon glyphicon-plus"></span> Agregar</button>
+                      <a href="{% url "vista_Convenios" 1%}" class="btn btn-danger" data-dismiss="modal" id="btnCancelar" name="btnCancelar" style="color:#fff;"><span class="glyphicon glyphicon-ok"></span> Finalizar</a>
+                     
+                    </div>
+                </div>
+          </form>
+            <br>
+                <div class="form-group">
+              <div class="">
+                    <table class="table table-condensed" id="tabla" name="tabla">
+                        <thead style="background-color: #222; color: #FAFAFA">
+                            <tr>
+                                <th></th>
+                                <th><center>Código</center></th>
+                                <th><center>Fecha Firma</center></th>
+                                <th><center>Fecha Inicio</center></th>
+                                <th><center>Fecha Fin</center></th>
+                                <th><center>FIP</center></th>
+                                <th><center>UE</center></th>
+                                <th><center>Asoc</center></th>
+                                <th><center>PDF</center></th>
+                                                    
+                                        
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for obj in lista %}
+                                <tr id="tr{{obj.IdDProy}}" class="text-info">
+                                    <td><input class="select" type="checkbox" name = "chk[]" value="{{obj.IdDProy}}"/></td>
+                                    <td ><center>{{ obj.IdDProy}}</center></td>
+                                    <td >{{obj.FecFirmaDProy|date:'Y-M-d'}}</td>
+                                    <td >{{obj.FecIniDProy|date:'Y-M-d'}}</td>
+                                    <td >{{obj.FecFinDProy|date:'Y-M-d'}}</td>
+                                    <td >S/. {{obj.MontAportFIPDProy}}</td>
+                                    <td >S/. {{obj.MontAportCliDProy}}</td>
+                                    <td >S/. {{obj.MontAportOtrDProy}}</td>
+                                    <td ><a target="_blank" href="{{MEDIA_URL}}{{obj.RutaPDFDProy}}">{{obj.RutaPDFDProy|cut:'adendasPDF/'}}</a></td>
+                                    
+                                                                                                                             
+                                   </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                                                         
+              </div>
+        </div>
+        </div>
+  </div>
+    </div>
+
+    <div class="col-lg-2">
+        
+    </div>
+{% endblock %}

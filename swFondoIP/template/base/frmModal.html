@@ -1,0 +1,46 @@
+<div class="modal fade" id="seleccionarConvenio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id = 'false'>&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Seleccionar Convenios</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group col-lg-8 pull-right">
+          <input type="text" class="form-control  pull-rigth" id="texto_Cliente" placeholder = "Escriba el nombre del convenio">
+        </div>
+        
+          <div style="height:400px;width:870px; overflow:scroll;">
+            <table class="table" id="tabla" name="tabla" style="border:1px solid #220; width:850px;"  align="center">
+              <thead style="background-color: #222; color: #FAFAFA;">
+                <tr id="cabecera"> 
+                    <th ><center>Código</center></th>
+                    <th ><center>Convenio</center></th>
+                    <th ><center>Unidad Ejecutora</center></th>                  
+                </tr>
+              </thead>
+              
+              <tbody>    
+               
+              {% for obj in  lista %}
+              
+                <tr id="tr{{obj.pk}}">
+                  <td class="micodigo"><a href="#">{{obj.IdMProy}}</a></td>
+                  <td class="nombre"><a href="#" id="proyecto[]" class="proy" nomProy="{{obj.NomMProy}}" codProy="{{obj.IdMProy}}" nomClie="{{obj.IdMCli.NomMCli}}" codClie="{{obj.IdMCli}}" title="{{obj.NomMProy}}">{{obj.NomMProy|truncatechars:60}}</a></td>            
+                  <td title="{{obj.IdMCli.NomMCli}}">{{obj.IdMCli.NomMCli|truncatechars:40}}</td>
+                  
+                </tr>
+              
+              {% endfor %}
+
+              </tbody>
+              
+            </table>  
+          </div>
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+

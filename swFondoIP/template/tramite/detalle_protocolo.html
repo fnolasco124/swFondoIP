@@ -1,0 +1,151 @@
+{% extends 'base3.html' %}
+{% block js%}
+<script src="/media/js/fipValidacion.js"></script>
+{% endblock %}
+{% block contenido %}
+	
+	<div class="col-lg-2">
+		
+	</div>
+	
+	<div class="container col-lg-8">
+		<div class="panel panel-default">
+		    <div class="panel-heading" style="background-color:#383821; color:#fff;">
+		        <center><b>Detalles del Protocolo</b></center>
+		    </div>
+			        
+		    <div class="panel-body">
+		
+		
+		<form method= "POST"  class="form-horizontal" role="form" name="frmDetalleProtocolo" id ="frmDetalleProtocolo" enctype="multipart/form-data">
+                {%csrf_token%}
+                  <div class="hide  form-group">
+                    <label class="col-lg-2 control-label">Codigo Usu</label>
+                    <div class="col-lg-4">
+                    	<input type="text" class="form-control" id="nomDProt"  name="nomDProt" value="{{user.pk}}">
+                    </div>
+                    <label class="col-lg-2 control-label">Protocolo</label>
+                    <div class="col-lg-4">
+                      <input type="text" class="form-control" id="codProtocolo"  name="codProtocolo" value="{{objMP.IdMProt}}">
+                    </div>  
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">Proyecto</label>
+                    <div class="col-lg-10">
+                      <label class="form-control" style="color:#FF0000">{{objMP.IdMProy.NomMProy|upper}}</label>
+                    </div>  
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">Unidad Ejecutora</label>
+                    <div class="col-lg-10">
+                      <label class="form-control" style="color:#FF0000">{{objMP.IdMProy.IdMCli.NomMCli|upper}}</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">Nombre</label>
+                    <div class="col-lg-10">
+                    	<input type="text" class="form-control" id="nomDProt"  name="nomDProt" placeholder="Ingrese nombre del documento">
+                    </div>
+                    
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">Formato</label>
+                    <div class="col-lg-4">
+                    	<select type="select" class="form-control" id="idTipDocDProt"  name="idTipDocDProt" placeholder="">
+                              <option value="">Seleccione</option>
+                              {% for f in lstFormato %}                
+                              <option value="{{f.pk}}">{{f.NomDTab}}</option>
+                              {% endfor %}
+                              <option value="1">Default</option>
+                      </select>
+                    </div>
+
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">Ubicación Física</label>
+                    <div class="col-lg-4">
+                        <select type="select" class="form-control" id="ubiFisDProt"  name="ubiFisDProt" placeholder="">
+                              <option value="">Seleccione</option>
+                              {% for a in lstAreas%}
+                              <option value="{{a.pk}}">{{a.NomDTab}}</option>
+                              {% endfor %}
+                              <option value="1">Default</option>
+                                                                  
+                        </select>
+                    </div>
+                    <!--
+                    <label class="col-lg-2 control-label">Ubicación Lógica</label>
+                    <div class="col-lg-4">
+                        <select type="select" class="form-control" id="ubiLogDProt"  name="ubiLogDProt" placeholder="">
+                              <option value="">Seleccione</option>
+                              {% for us in lstUsuario %}
+                              <option value="{{us.idMUsu.pk}}">{{us.idMUsu.username}}</option>
+                              {% endfor%}
+                        </select>
+                    </div> -->
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">PDF</label>
+                    <div class="col-lg-10">
+                    	{{form.RutaPdfDProt}}
+                        <!--<input type="file" class="form-control" id="rutaPDFDProt"  name="rutaPDFDProt" placeholder="Buscar la Unidad Ejecutora">-->
+                    </div>                    
+                  </div>
+                  <!--
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">OCR</label>
+                    <div class="col-lg-10">
+                    	{{form.rutaOcrDProt}}
+                        
+                    </div>                    
+                  </div>
+                -->
+                  <div class="form-group">
+                    <div class="col-lg-offset-5 col-lg-12">
+                      
+                      <button type="submit" class="btn btn-success" id="btnAgregarDetalle" name="btnAgregarDetalle"><span class="glyphicon glyphicon-plus"></span> Agregar</button>
+                      <a href="{% url "vista_Bandeja" 1%}" class="btn btn-danger" data-dismiss="modal" id="btnCancelarDetalle" name="btnCancelarDetalle" style="color:#fff; "><span class="glyphicon glyphicon-ok"></span> Finalizar</a>
+                     
+                    </div>
+                </div>
+          </form>
+          	<br>
+    			<div class="form-group">
+              <div class="col-lg-offset-1 col-lg-10">
+                 	<table class="table table-condensed" id="tabla" name="tabla">
+              				<thead style="background-color:#383821; color:#fff;">
+              						<tr>
+              						<th><input type="checkbox"></th>
+              						{% for item in listFields %}
+              							<th ><center>{{ item }}</center></th>
+              						{% endfor %}
+            							</tr>
+             							</thead>
+             							{% for obj in  lista %}
+               							<tbody>
+              								<tr id="tr{{obj.id}}">
+              									<td><input class="select" data-name="{{obj.NomDTab}}" type="checkbox" name = "chk[]" value="{{obj.IdDProt}}"/></td>
+              									<td ><center>{{ obj.IdDProt }}</center></td>
+              									<td >{{obj.NomDProt}}</td>
+              									<!--<td >{{obj.idTipDocDProt}}</td>-->
+              									<td ><a href="#" ruta="{{MEDIA_URL}}{{rutaPdfDProt}}">{{obj.RutaPdfDProt}}</a></td>              									              										
+              								</tr>
+
+              							</tbody>
+              							{% endfor %}
+
+    						  </table>                                        
+              </div>
+        </div>
+		</div>
+  </div>
+	</div>
+
+	<div class="col-lg-2">
+		
+	</div>
+{% endblock %}

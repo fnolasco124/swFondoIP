@@ -1,0 +1,168 @@
+{% extends 'base3.html' %}
+{% block js%}
+<script src="/media/js/fipValidacion.js"></script>
+<script src="/media/js/otro.js"></script>
+{% endblock %}
+{% block contenido %}
+    
+    <div class="col-lg-2">
+        
+    </div>
+    
+    <div class="container col-lg-8">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#383821; color:#fff;">
+                <center><b>Colaboradores asignados</b></center>
+            </div>
+                    
+            <div class="panel-body">
+        
+        
+        <form method= "POST" action="" class="form-horizontal" role="form" name="frmColaborador" id ="frmColaborador" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Nº del Convenio</label>
+                    <div class="col-lg-4">
+                      <input type="text" class="hide form-control" id="codProyecto"  name="codProyecto" value="{{objMP.IdMProy}}">
+                      <label  class="form-control" id="codProyecto"  name="codProyecto" style="color:#FF0000"> {{objMP.IdMProy}}</label>
+                    </div>  
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Unidad Ejecutora</label>
+                    <div class="col-lg-10">
+                      <label class="form-control" style="color:#FF0000">{{objMP.IdMCli.NomMCli}}</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Nombre del Proyecto</label>
+                    <div class="col-lg-10">
+                      <label class="form-control" style="color:#FF0000">{{objMP.NomMProy}}</label>
+                    </div>  
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Responsable</label>
+                    <div class="col-lg-7">
+                        <select type="select" class="form-control" id="idMPer"  name="idMPer" placeholder="">
+                              <option value="">Seleccione</option>
+                              {% for p in lstPersonal %}
+                              <option value="{{p.IdMPer}}">{{ p.ApePMPer}} {{p.ApeMMPer}}, {{p.NomMPer}}</option>
+                              {% endfor %}
+                      </select>
+                    </div>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Cargo</label>
+                    <div class="col-lg-4">
+                        <select type="select" class="form-control" id="idTipoCargoProy"  name="idTipoCargoProy" placeholder="">
+                              <option value="">Seleccione</option>
+                              <option value="0">Supervisor Financiero</option>
+                              <option value="1">Administrador</option>                   
+                              <option value="2">Consultor</option>                   
+                      </select>
+                    </div>
+
+                    
+                    
+                </div>
+                <div class="hide form-group">
+                    <label class="col-lg-2 control-label">Diferencia de tiempo</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="tiempoMCol"  name="tiempoMCol">
+                    </div>
+                    
+                </div>
+
+                <div class="hide" id="personalExterno">
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">Fecha Inicio</label>
+                        <div class="col-lg-4">
+                            <input type="date" class="form-control" id="fecIniMCol"  name="fecIniMCol" placeholder="Fecha de nacimiento">
+                        </div>
+                        <label class="col-lg-2 control-label">Fecha Fin</label>
+                        <div class="col-lg-4">
+                            <input type="date" class="form-control" id="fecFinMCol"  name="fecFinMCol" placeholder="Fecha de nacimiento">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Monto Mensual</label>
+                        <div class="col-lg-4">
+                          <input type="numeric" class="form-control text-right" id="montoMenMCol"  name="montoMenMCol" value="0">
+                        </div>
+                        <label class="col-lg-2 control-label">Monto Total</label>
+                        <div class="col-lg-4">
+                          <input type="numeric" class="form-control text-right noModificarValorDeTexto" id="montoMCol"  name="montoMCol" value="0">
+                        </div>  
+                    </div>
+                      
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">PDF</label>
+                        <div class="col-lg-10">
+                            {{form.RutaPDFMCol}}
+                            
+                        </div>                    
+                    </div>
+                    
+                </div>
+               
+                  
+                  <div class="form-group">
+                    <div class="col-lg-offset-5 col-lg-12">
+                      
+                      <button type="submit" class="btn btn-success" id="btnAgregarColaborador" name="btnAgregarColaborador"><span class="glyphicon glyphicon-plus"></span> Agregar</button>
+                      <a href="{% url "vista_Convenios" 1%}" class="btn btn-danger" data-dismiss="modal" id="btnCancelar" name="btnCancelar" style="color:#fff;"><span class="glyphicon glyphicon-ok"></span> Finalizar</a>
+                     
+                    </div>
+                </div>
+          </form>
+            <br>
+                <div class="form-group">
+              <div class="">
+                    <table class="table table-condensed" id="tabla" name="tabla">
+                        <thead style="background-color: #222; color: #FAFAFA">
+                            <tr>
+                                <th></th>
+                                <th><center>Apellidos y Nombres</center></th>
+                                <th><center>Fecha Firma</center></th>
+                                <th><center>Fecha Inicio</center></th>
+                                <th><center>Fecha Fin</center></th>
+                                <th><center>Monto</center></th>
+                                <th><center>PDF</center></th>
+                                                    
+                                        
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in lista %}
+                                <tr id="tr{{item.IdMPer}}" class="text-info">
+                                    <td><input class="select" type="checkbox" name = "chk[]" value="{{item.pk}}"/></td>
+                                    <td ><center>{{ item.IdMPer.ApePMPer}} {{item.IdMPer.ApeMMPer}}, {{item.IdMPer.NomMPer}}</center></td>
+                                    <td >{{item.FecFirmaMCol|date:'Y-M-d'}}</td>
+                                    <td >{{item.FecIniMCol|date:'Y-M-d'}}</td>
+                                    <td >{{item.FecFinMCol|date:'Y-M-d'}}</td>
+                                    <td >{{item.MontoMCol}}</td>
+                                    <td ><a target ="_blank" href="{{MEDIA_URL}}{{item.RutaPDFMCol}}">{{item.RutaPDFMCol|cut:'colaborador'}}</a></td>
+                                    
+                                                                                                                             
+                                   </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                                                         
+              </div>
+        </div>
+        </div>
+  </div>
+    </div>
+
+    <div class="col-lg-2">
+        
+    </div>
+{% endblock %}

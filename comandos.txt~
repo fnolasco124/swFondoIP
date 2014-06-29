@@ -1,0 +1,37 @@
+
+Comandos:
+
+sudo apt-get install python-pip
+sudo apt-get python-setuptools
+
+pip install Django == 1.6.2
+sudo pip install south
+
+sudo apt-get install python-mysqldb
+sudo apt-get install libmysqlclient-dev
+
+sudo apt-get install git
+git config --global user.name ""
+git config --global user.email ""
+ssh-keygen
+cat ~/.ssh/id_rsa.pub
+Copiar y registrar el contenido de la llave en github.
+
+git init
+git remote add origin git@github.com:nombreCuenta/nombreRepo.git
+git pull origin master
+git add .
+git commit -m "Comentario"
+git push origin master
+
+
+sudo pip install django-bootstrap-form
+sudo apt-get install mysql-server mysql-common mysql-client
+
+
+$ mysql -u <usuario> -p --local-infile <database>
+
+LOAD DATA LOCAL INFILE 'datos.csv' INTO TABLE tbldatos
+    FIELDS TERMINATED BY ',' ENCLOSED BY '"' ESCAPED BY '\\'
+    LINES TERMINATED BY '\n'
+    (id, nombre, fecha);
